@@ -54,4 +54,37 @@ public class Data {
             },
     };
 
+    /**
+     * Matrices for testing solution values
+     */
+    public static final double[][][] matrices = {
+            // 1
+            {
+                    {1, 1, 1, 2},
+                    {0, 1, -3, 1},
+                    {2, 1, 3, 0},
+            },
+
+            // 2
+            {
+                    {4, 5, 9, 9, 9, 0},
+                    {0, 4, 0, 5, 6, 3},
+                    {3, 0, 0, 4, 1, 0},
+                    {0, 0, -2, 0, 0, 4},
+                    {-4, 3, 1, -9, 5, 4},
+            },
+
+    };
+
+    /**
+     * Solution values for matrices
+     */
+    public static final double[][] solutionValues = {
+            // 1
+            {-5, 5.5, 1.5},
+
+            // 2
+            {132.0/7.0, 51.0, -2.0, -51.0/7.0, -192.0/7.0},
+
+    };
 }

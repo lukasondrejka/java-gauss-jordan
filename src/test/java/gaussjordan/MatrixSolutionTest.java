@@ -51,4 +51,33 @@ class MatrixSolutionTest {
         }
     }
 
+    /**
+     * Test solution values
+     */
+    @Test
+    void testSolutionValues() {
+        //noinspection ConstantConditions
+        if (Data.matrices.length != Data.solutionValues.length) {
+            throw new IllegalArgumentException("Data.matrices.length != Data.solutionValues.length");
+        }
+
+        for (int i = 0; i < Data.matrices.length; i++) {
+            // Get matrix data and expected solution
+            double[][] matrixData = Data.matrices[i];
+            double[] expectedSolution = Data.solutionValues[i];
+
+            Matrix matrix = new Matrix(matrixData);
+            matrix.eliminate();
+
+            assertEquals(Solution.ONE_SOLUTION, matrix.getSolution());
+
+            // Get solution values
+            double[] solutionValues = matrix.getSolutionValues();
+
+            for (int j = 0; j < solutionValues.length; j++) {
+                assertEquals(expectedSolution[j], solutionValues[j], 1e-10);
+            }
+        }
+    }
+
 }

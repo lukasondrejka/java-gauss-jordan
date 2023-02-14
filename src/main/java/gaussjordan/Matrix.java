@@ -66,7 +66,6 @@ public class Matrix {
             boolean rowWithZeros = true;
             for (int columnIndex = 0; columnIndex < columnCount + 1; columnIndex++) {
 
-                // if matrix[rowIndex][columnIndex] != 0
                 if (Helper.isNotZero(matrix[rowIndex][columnIndex])) {
                     rowWithZeros = false;
                     if (pivotColumnIndex == columnCount) {
@@ -98,13 +97,13 @@ public class Matrix {
             }
 
             double constant;
-            for (int k = 0; k < rowCount; k++) {
-                if (k == pivotRowIndex) {
+            for (int rowIndex2 = 0; rowIndex2 < rowCount; rowIndex2++) {
+                if (rowIndex2 == pivotRowIndex) {
                     continue;
                 }
-                constant = matrix[k][pivotColumnIndex];
-                for (int j = 0; j < columnCount + 1; j++) {
-                    matrix[k][j] -= constant * matrix[pivotRowIndex][j];
+                constant = matrix[rowIndex2][pivotColumnIndex];
+                for (int columnIndex2 = 0; columnIndex2 < columnCount + 1; columnIndex2++) {
+                    matrix[rowIndex2][columnIndex2] -= constant * matrix[pivotRowIndex][columnIndex2];
                 }
             }
         }
@@ -143,6 +142,14 @@ public class Matrix {
     }
 
     /**
+     * Get number at position
+     * @return number at position
+     */
+    public double get(int rowIndex, int columnIndex) {
+        return matrix[rowIndex][columnIndex];
+    }
+
+    /**
      * Get solution
      * @return Solution
      */
@@ -151,11 +158,43 @@ public class Matrix {
     }
 
     /**
+     * Get solution values
+     * @return solution values
+     */
+    public double[] getSolutionValues() {
+        if (this.solution != Solution.ONE_SOLUTION) {
+            return null;
+        }
+
+        double[] solutionValues = new double[columnCount];
+        for (int i = 0; i < columnCount; i++) {
+            solutionValues[i] = matrix[i][columnCount];
+        }
+
+        return solutionValues;
+    }
+
+    /**
      * String representation of matrix
      * @return String
      */
     @Override
     public String toString() {
-        return Helper.matrixToString(matrix);
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(Helper.matrixToString(matrix));
+
+        if (solution != Solution.UNKNOWN) {
+            sb.append("Solution: ").append(solution).append("\n");
+
+            if (solution == Solution.ONE_SOLUTION) {
+                double[] solutionValues = this.getSolutionValues();
+                for (int i = 0; i < columnCount; i++) {
+                    sb.append("x").append(i).append(" = ").append(solutionValues[i]).append("\n");
+                }
+            }
+        }
+
+        return sb.toString();
     }
 }

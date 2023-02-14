@@ -20,7 +20,7 @@ public class Main {
         boolean loaded = false;
 
         while (!loaded) {
-            System.out.println("Enter file name: ");
+            System.out.print("Enter file name: ");
             String fileName = Helper.readString();
 
             try {
@@ -41,8 +41,7 @@ public class Main {
         Matrix m = new Matrix(data);
         m.eliminate();
 
-        System.out.printf("Input matrix: %n%s%n", Helper.matrixToString(data));
+        System.out.printf("\nInput matrix: %n%s%n", Helper.matrixToString(data));
         System.out.printf("Eliminated matrix: %n%s%n", m);
-        System.out.printf("Solution: %s%n", m.getSolution());
     }
 }

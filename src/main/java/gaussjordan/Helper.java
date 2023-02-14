@@ -8,14 +8,14 @@ import java.io.BufferedReader;
 public class Helper {
 
     /**
+     * Zero threshold value
+     */
+    private static final double ZERO = 1e-10;
+
+    /**
      * Buffered reader for reading input from console
      */
     private static BufferedReader reader;
-
-    /**
-     * Zero threshold value
-     */
-    private static final double ZERO = 0.000_000_1;
 
     /**
      * Check if number is zero

@@ -17,16 +17,16 @@ package gaussjordan;
  * Class Matrix for Gauss-Jordan elimination method
  */
 public class Matrix {
-    private double[][] matrix;
-    private int[] base;
-    private int rowCount;
-    private int columnCount;
+    private final double[][] matrix;
+    private final int[] base;
+    private final int rowCount;
+    private final int columnCount;
     private Solution solution;
 
     /**
      * Constructor
-     * @param rowCount
-     * @param columnCount
+     * @param rowCount number of rows
+     * @param columnCount number of columns of matrix A (without b column)
      */
     public Matrix(int rowCount, int columnCount) {
         if (rowCount < 1 || columnCount < 1) {
@@ -42,17 +42,15 @@ public class Matrix {
 
     /**
      * Constructor
-     * @param sourceData
+     * @param sourceData source data
      */
     public Matrix(double[][] sourceData) {
-        this(sourceData.length, sourceData[0].length);
+        this(sourceData.length, sourceData[0].length - 1);
 
-        for (int i = 0; i < sourceData.length; i++) {
-            this.matrix[i] = new double[sourceData[i].length];
-            System.arraycopy(sourceData[i], 0, this.matrix[i], 0, this.columnCount);
+        for (int i = 0; i < this.rowCount; i++) {
+            this.matrix[i] = new double[this.columnCount + 1];
+            System.arraycopy(sourceData[i], 0, this.matrix[i], 0, this.columnCount + 1);
         }
-
-        this.columnCount--;
     }
 
     /**
@@ -99,7 +97,7 @@ public class Matrix {
                 matrix[rowIndex][columnIndex] /= pivot;
             }
 
-            double constant = 1;
+            double constant;
             for (int k = 0; k < rowCount; k++) {
                 if (k == pivotRowIndex) {
                     continue;

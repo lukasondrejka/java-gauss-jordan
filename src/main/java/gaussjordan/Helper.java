@@ -1,9 +1,16 @@
 package gaussjordan;
 
+import java.io.BufferedReader;
+
 /**
  * Helper class
  */
 public class Helper {
+
+    /**
+     * Buffered reader for reading input from console
+     */
+    private static BufferedReader reader;
 
     /**
      * Zero threshold value
@@ -29,6 +36,22 @@ public class Helper {
     }
 
     /**
+     * read String from console
+     * @return String read from console
+     */
+    public static String readString() {
+        if (reader == null) {
+            reader = new BufferedReader(new java.io.InputStreamReader(System.in));
+        }
+
+        try {
+            return reader.readLine();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    /**
      * Format number
      * @param number number to format
      * @return formatted number
@@ -48,10 +71,9 @@ public class Helper {
      */
     public static String matrixToString(double[][] matrix) {
         StringBuilder s = new StringBuilder();
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                s.append(Helper.formatNumber(matrix[i][j]))
-                        .append("  ");
+        for (double[] row : matrix) {
+            for (double number : row) {
+                s.append(Helper.formatNumber(number)).append("  ");
             }
             s.append("\n");
         }

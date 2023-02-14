@@ -36,7 +36,7 @@ public class Helper {
     }
 
     /**
-     * read String from console
+     * Read String from console
      * @return String read from console
      */
     public static String readString() {
